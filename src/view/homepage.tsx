@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Box, Button, Container, TextField, Typography, Stack, CircularProgress } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import logo from '../assets/img/clientLogo.png';
+import logo from '../assets/img/clientlogo.png';
 import background from '../assets/img/background.jpg';
 
 interface Movie {
@@ -45,7 +45,6 @@ const Homepage: React.FC = () => {
     }
   };
 
-
   return (
     <Box
       display="flex"
@@ -57,48 +56,56 @@ const Homepage: React.FC = () => {
         backgroundSize: 'cover',
       }}
     >
-      <Container maxWidth="sm">
-        <Stack spacing={2} alignItems="center">
+      <Container maxWidth="sm" sx={{ height: '100%', display: 'flex' }}>
+        <Stack spacing={2} direction="column" alignItems="center" justifyContent="space-between">
           <Box
               component="img"
               src={logo}
               alt="Logo"
               sx={{
-                width: '15%',
-                marginBottom: '2rem',
+                width: '10%',
+                marginTop: '6rem!important',
                 margin: '0 auto'
               }}
             />
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography sx={{ fontFamily: 'lato, sans-serif', fontSize: '2.0625rem', fontWeight: 'bold' }}>
-              Anti Kudet!
+            <Stack spacing={2} alignItems="center">
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography sx={{ fontFamily: 'lato, sans-serif', fontSize: '2.0625rem', fontWeight: 'bold' }}>
+                  MoVerse
+                </Typography>
+                <Typography sx={{ fontFamily: 'lato, sans-serif', fontSize: '2.0625rem', fontWeight: 'bold' }}>
+                  Jelajahi Dunia Film Tanpa Batas
+                </Typography>
+                <Typography sx={{ fontFamily: 'lato, sans-serif', fontSize: '.77rem', mt: 1 }}>
+                  Cari dan Temukan film favoritmu dari seluruh dunia. Mulai dari film indie yang menyentuh hingga blockbuster yang mendebarkan. Temukan semua informasi yang kamu butuhkan hanya di MoVerse.
+                </Typography>
+              </Box>
+              <Stack direction='row' sx={{ mt: 3, width: '100%' }}>
+                <TextField
+                  variant="outlined"
+                  placeholder="Cari film favoritmu disini..."
+                  fullWidth
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+                <Button
+                  variant="contained"
+                  color="error"
+                  startIcon={<SearchIcon />}
+                  onClick={handleSearch}
+                >
+                  {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Search'}
+                </Button>
+              </Stack>
+              {error && <Typography color="error">{error}</Typography>}
+              <Typography variant="body2" color="secondary" sx={{ mt: 2, fontStyle: 'italic' }}>
+                <Link to="/all-movies" style={{ textDecoration: 'none', color: 'red' }}>
+                  Atau lihat semua daftar film disini
+                </Link>
+              </Typography>
+            </Stack>
+            <Typography variant="body2" color="textSecondary" align="center" pb={5}>
+              © Copyright All Rights Reserved 2024. Developed by Anggin Megantara
             </Typography>
-            <Typography sx={{ fontFamily: 'lato, sans-serif', fontSize: '1.2rem', mt: 1, fontWeight: 'bold' }}>
-              Semua Informasi Tentang Film Paling Update Hanya Disini!
-            </Typography>
-          </Box>
-          <Stack direction='row' sx={{ mt: 3, width: '100%' }}>
-            <TextField
-              variant="outlined"
-              placeholder="Cari film favoritmu disini..."
-              fullWidth
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <Button
-              variant="contained"
-              color="error"
-              startIcon={<SearchIcon />}
-              onClick={handleSearch}
-            >
-              {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Search'}
-            </Button>
-          </Stack>
-          {error && <Typography color="error">{error}</Typography>}
-          <Typography variant="body2" color="secondary" sx={{ mt: 2, fontStyle: 'italic' }}>
-            <Link to="/all-movies" style={{ textDecoration: 'none', color: 'red' }}>
-              Atau lihat semua daftar film disini
-            </Link>
-          </Typography>
         </Stack>
       </Container>
     </Box>

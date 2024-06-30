@@ -30,6 +30,10 @@ const MovieList: React.FC = () => {
     navigate(path);
   };
 
+  const handleMovieClick = (movie: Movie) => {
+    navigate(`/movie/${movie.imdbID}`, { state: movie });
+  };
+
   const fetchMovies = async (page: number) => {
     setLoading(true);
     try {
@@ -88,7 +92,7 @@ const MovieList: React.FC = () => {
             ))
           : movies.map((movie) => (
               <Grid item xs={12} sm={6} md={4} lg={3} key={movie.imdbID}>
-                <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }} onClick={() => handleMovieClick(movie)}>
                   <CardMedia
                     component="img"
                     height="435"

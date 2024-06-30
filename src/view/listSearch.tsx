@@ -23,6 +23,10 @@ const ListSearch: React.FC = () => {
   const handleNavigation = (path: To) => {
     navigate(path);
   };
+
+  const handleMovieClick = (movie: Movie) => {
+    navigate(`/movie/${movie.imdbID}`, { state: movie });
+  };
   return (
     <Box p={2}>
         <Stack direction="row" spacing={2} mb={2} alignItems="center">
@@ -34,7 +38,7 @@ const ListSearch: React.FC = () => {
         <Grid container spacing={2}>
         {movies.map((movie) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={movie.imdbID}>
-            <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }} onClick={() => handleMovieClick(movie)}>
               <CardMedia
                 component="img"
                 height="435"
